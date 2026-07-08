@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const errorHandler = require("./middleware/errorHandler");
 
 const connectDB = require("./config/db");
 
@@ -22,6 +23,8 @@ app.use("/api/feedback", feedbackRoutes);
 app.get("/", (req, res) => {
     res.send("API Running...");
 });
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
