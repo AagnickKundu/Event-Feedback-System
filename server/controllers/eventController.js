@@ -1,4 +1,4 @@
-const Event = require("../models/Event");
+import Event from "../models/Event.js";
 
 // createEvent()
 const createEvent = async (req, res) => {
@@ -85,7 +85,7 @@ const deleteEvent = async (req, res) => {
 };
 
 
-module.exports = {
+export {
     getEvents,
     getEventById,
     createEvent,

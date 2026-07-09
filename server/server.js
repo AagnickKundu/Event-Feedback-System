@@ -1,12 +1,19 @@
-const express = require("express");
-const dotenv = require("dotenv");
-const cors = require("cors");
-const errorHandler = require("./middleware/errorHandler");
+// const express = require("express");
+// const dotenv = require("dotenv");
+// const cors = require("cors");
+// const errorHandler = require("./middleware/errorHandler");
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import errorHandler from "./middleware/errorHandler.js";
 
-const connectDB = require("./config/db");
+// const connectDB = require("./config/db");
+import connectDB from "./config/db.js";
 
-const eventRoutes = require("./routes/eventRoutes");
-const feedbackRoutes = require("./routes/feedbackRoutes");
+// const eventRoutes = require("./routes/eventRoutes");
+// const feedbackRoutes = require("./routes/feedbackRoutes");
+import eventRoutes from "./routes/eventRoutes.js";
+import feedbackRoutes from "./routes/feedbackRoutes.js";
 
 dotenv.config();
 

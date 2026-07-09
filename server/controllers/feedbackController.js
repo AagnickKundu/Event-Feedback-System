@@ -1,5 +1,5 @@
-const Feedback = require("../models/Feedback");
-const Event = require("../models/Event");
+import Feedback from "../models/Feedback.js";
+import Event from "../models/Event.js";
 
 // submitFeedback()
 const submitFeedback = async (req, res) => {
@@ -72,7 +72,7 @@ const deleteFeedback = async (req, res) => {
     }
 };
 
-module.exports = {
+export {
     submitFeedback,
     getAllFeedback,
     getFeedbackByEvent,

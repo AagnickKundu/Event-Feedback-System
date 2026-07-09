@@ -1,11 +1,11 @@
-const express = require("express");
+import express from "express";
 
-const {
+import {
     submitFeedback,
     getAllFeedback,
     getFeedbackByEvent,
     deleteFeedback,
-} = require("../controllers/feedbackController");
+} from "../controllers/feedbackController.js";
 
 const router = express.Router();
 
@@ -21,4 +21,4 @@ router.get("/event/:eventId", getFeedbackByEvent);
 // Delete feedback
 router.delete("/:id", deleteFeedback);
 
-module.exports = router;
+export default router;
