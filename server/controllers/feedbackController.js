@@ -5,7 +5,7 @@ import Event from "../models/Event.js";
 const submitFeedback = async (req, res) => {
     try {
         // Check whether the event exists
-        const event = await Event.findById(req.body.event);
+        const event = await Event.findById(req.body.eventId);
         if (!event) {
             return res.status(404).json({
                 message: "Event not found"
@@ -26,7 +26,7 @@ const submitFeedback = async (req, res) => {
 const getAllFeedback = async (req, res) => {
     try {
         const feedbacks = await Feedback.find()
-            .populate("event", "title date location")
+            .populate("eventId", "title date location")
             .sort({ createdAt: -1 });
         res.status(200).json(feedbacks);
     } catch (error) {
@@ -40,7 +40,7 @@ const getAllFeedback = async (req, res) => {
 const getFeedbackByEvent = async (req, res) => {
     try {
         const feedbacks = await Feedback.find({
-            event: req.params.eventId
+            eventId: req.params.eventId
         }).sort({ createdAt: -1 });
         res.status(200).json(feedbacks);
     } catch (error) {
