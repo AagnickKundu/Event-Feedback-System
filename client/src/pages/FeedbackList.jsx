@@ -1,5 +1,5 @@
 function Home() {
-  return <h1>FeedbackList Page</h1>;
+  return <h1>Feedback List Page</h1>;
 }
 
 export default Home;
