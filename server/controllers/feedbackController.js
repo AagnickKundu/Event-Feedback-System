@@ -26,7 +26,7 @@ const submitFeedback = async (req, res) => {
 const getAllFeedback = async (req, res) => {
     try {
         const feedbacks = await Feedback.find()
-            .populate("eventId", "title date location")
+            .populate("eventId", "title date venue")
             .sort({ createdAt: -1 });
         res.status(200).json(feedbacks);
     } catch (error) {

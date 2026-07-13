@@ -1,0 +1,111 @@
+.feedback-form {
+
+    margin-top: 50px;
+
+    background: white;
+
+    padding: 40px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .08);
+
+}
+
+.feedback-form h2 {
+
+    margin-bottom: 30px;
+
+}
+
+.feedback-form form {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+
+}
+
+.feedback-form input,
+
+.feedback-form textarea,
+
+.feedback-form select {
+
+    padding: 15px;
+
+    font-size: 16px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+
+    outline: none;
+
+}
+
+.feedback-form textarea {
+
+    resize: none;
+
+}
+
+.feedback-form button {
+
+    background: #2563eb;
+
+    color: white;
+
+    border: none;
+
+    padding: 15px;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+}
+
+.feedback-form button:hover {
+
+    background: #1d4ed8;
+
+}
+
+.rating-stars {
+
+    display: flex;
+
+    gap: 12px;
+
+    margin: 10px 0 20px;
+
+}
+
+.star {
+
+    cursor: pointer;
+
+    color: #d1d5db;
+
+    transition: .2s;
+
+}
+
+.star:hover {
+
+    transform: scale(1.2);
+
+}
+
+.active-star {
+
+    color: #facc15;
+
+}

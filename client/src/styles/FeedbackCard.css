@@ -1,0 +1,42 @@
+.feedback-card{
+    background:white;
+    border-radius:15px;
+    padding:25px;
+    margin-bottom:25px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.feedback-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.feedback-header h3{
+    color:#1e293b;
+}
+
+.feedback-comment{
+    color:#475569;
+    margin-bottom:20px;
+    line-height:1.6;
+}
+
+.feedback-info p{
+    margin:8px 0;
+}
+
+.delete-btn{
+    margin-top:20px;
+    background:#ef4444;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.delete-btn:hover{
+    background:#dc2626;
+}
