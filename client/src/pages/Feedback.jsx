@@ -5,6 +5,7 @@ import "../styles/Feedback.css";
 import { FaStar } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { submitFeedback } from "../services/api";
+import { useForm } from "react-hook-form";
 
 function Feedback() {
 
@@ -12,11 +13,27 @@ function Feedback() {
 
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    rating: 5,
-    comment: "",
+  // const [formData, setFormData] = useState({
+  //   name: "",
+  //   email: "",
+  //   rating: 5,
+  //   comment: "",
+  // });
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+    setValue,
+    watch
+  } = useForm({
+    defaultValues: {
+      name: "",
+      email: "",
+      rating: 5,
+      comment: ""
+    }
   });
   const [hover, setHover] = useState(0);
 
@@ -46,42 +63,64 @@ function Feedback() {
 
   }, [id]);
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  // const handleChange = (e) => {
+  //   setFormData({
+  //     ...formData,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
 
   if (loading) return <h2>Loading...</h2>;
 
   if (!event) return <h2>Event not found.</h2>;
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const onSubmit = async (data) => {
+  //   e.preventDefault();
 
+  //   try {
+  //     await submitFeedback({
+  //       eventId: event._id,
+  //       name: formData.name,
+  //       email: formData.email,
+  //       rating: Number(formData.rating),
+  //       comment: formData.comment,
+  //     });
+
+  //     toast.success("Feedback submitted successfully!");
+
+  //     setFormData({
+  //       name: "",
+  //       email: "",
+  //       rating: 5,
+  //       comment: "",
+  //     });
+
+  //   } catch (error) {
+
+  //     console.error(error);
+
+  //     toast.error("Failed to submit feedback.");
+  //   }
+  // };
+
+  const onSubmit = async (data) => {
     try {
       await submitFeedback({
         eventId: event._id,
-        name: formData.name,
-        email: formData.email,
-        rating: Number(formData.rating),
-        comment: formData.comment,
+        name: data.name,
+        email: data.email,
+        rating: Number(data.rating),
+        comment: data.comment,
       });
 
       toast.success("Feedback submitted successfully!");
 
-      setFormData({
-        name: "",
-        email: "",
-        rating: 5,
-        comment: "",
-      });
+      reset();
+
+      setValue("rating", 5);
 
     } catch (error) {
-
       console.error(error);
-
       toast.error("Failed to submit feedback.");
     }
   };
@@ -106,23 +145,51 @@ function Feedback() {
 
         <h2>Submit Your Feedback</h2>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
 
-          <input
+          {/* <input
             type="text"
             name="name"
             placeholder="Your Name"
             value={formData.name}
             onChange={handleChange}
-          />
+          /> */}
 
           <input
+            type="text"
+            placeholder="Your Name"
+            {...register("name", {
+              required: "Name is required"
+            })}
+          />
+
+          {errors.name && (
+            <p className="error">{errors.name.message}</p>
+          )}
+
+          {/* <input
             type="email"
             name="email"
             placeholder="Email Address"
             value={formData.email}
             onChange={handleChange}
+          /> */}
+
+          <input
+            type="email"
+            placeholder="Email Address"
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^\S+@\S+\.\S+$/,
+                message: "Enter a valid email"
+              }
+            })}
           />
+
+          {errors.email && (
+            <p className="error">{errors.email.message}</p>
+          )}
 
           <div className="rating-stars">
 
@@ -135,36 +202,56 @@ function Feedback() {
                 size={34}
 
                 className={
-                  star <= (hover || formData.rating)
+                  star <= (hover || watch("rating"))
                     ? "star active-star"
                     : "star"
                 }
 
                 onClick={() =>
-
-                  setFormData({
-
-                    ...formData,
-
-                    rating: star
-
-                  })
+                  setValue("rating", star)
 
                 }
+
+
+                onMouseEnter={() => setHover(star)}
+                onMouseLeave={() => setHover(0)}
+
 
               />
 
             ))}
+            <input
+              type="hidden"
+              {...register("rating", {
+                required: "Rating is required"
+              })}
+            />
 
           </div>
 
-          <textarea
+          {/* <textarea
             rows="5"
             name="comment"
             placeholder="Write your feedback..."
             value={formData.comment}
             onChange={handleChange}
+          /> */}
+
+          <textarea
+            rows="5"
+            placeholder="Write your feedback..."
+            {...register("comment", {
+              required: "Comment is required",
+              minLength: {
+                value: 10,
+                message: "Comment should be at least 10 characters"
+              }
+            })}
           />
+
+          {errors.comment && (
+            <p className="error">{errors.comment.message}</p>
+          )}
 
           <button type="submit">
             Submit Feedback

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "../styles/EventCard.css";
+import Eventimg from "../assets/Events-bro.png";
 
 function EventCard({ event }) {
     return (
@@ -10,7 +11,7 @@ function EventCard({ event }) {
                     src={
                         event.image && event.image.trim() !== ""
                             ? event.image
-                            : "https://placehold.co/600x350/e2e8f0/475569?text=Event+Image"
+                            : Eventimg
                     }
                     alt={event.title}
                 />
