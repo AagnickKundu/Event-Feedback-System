@@ -84,7 +84,6 @@ const deleteEvent = async (req, res) => {
     }
 };
 
-
 export {
     getEvents,
     getEventById,
