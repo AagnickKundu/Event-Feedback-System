@@ -25,19 +25,14 @@ function Events() {
 
     return (
         <section className="container">
-
             <h1 className="section-title">
                 Upcoming Events
             </h1>
-
             {loading && <h2>Loading Events...</h2>}
-
             {error && <h2>{error}</h2>}
-
             {!loading && !error && events.length === 0 && (
                 <p>No events available.</p>
             )}
-
             <div
                 style={{
                     display: "grid",
@@ -54,10 +49,8 @@ function Events() {
                     />
                 ))}
             </div>
-
         </section>
     );
-
 }
 
 export default Events;
